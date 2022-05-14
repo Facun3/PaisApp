@@ -9,8 +9,8 @@ import { PaisService } from '../../services/pais.service';
   ]
 })
 export class PorPaisComponent implements OnInit {
-
-  public termino: string = '';
+  public pista: string = 'Ingrese Pais...';
+  public busqueda: string = '';
   public hayError: boolean = false;
   public paises: Country[] = [];
   constructor( private paisService: PaisService) {
@@ -18,21 +18,19 @@ export class PorPaisComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.hayError = false;
   }
 
-  public ingresarBusqueda(): void{
-    this.hayError = false;
-    if(this.termino != '' && this.termino != null){
-      this.paisService.searchByName(this.termino).subscribe(
-        ( response ) => {
-          this.paises = response;
-          console.log( response );
-        },
-        ( error ) => {
-              this.hayError = true;
-        }
-      );
-      this.termino = '';
-    }
+  public ingresarBusqueda( busqueda: string): void{
+    this.busqueda = busqueda;
+    this.hayError = false;  
+    this.paisService.searchByCountry(busqueda).subscribe(
+      ( response ) => {
+        this.paises = response;
+      },
+      ( error ) => {
+            this.hayError = true;
+      }
+    );
   }
 }

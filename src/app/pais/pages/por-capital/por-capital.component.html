@@ -1,1 +1,20 @@
-<p>por-capital works!</p>
+<h2>Por Capital</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-input (onDebounce)="ingresarBusqueda($event)" [placeholder]="pista" ></app-input>
+    </div>
+</div>
+<hr>
+<div class="alert alert-danger" *ngIf="hayError">
+    No se encontro nada con el término {{busqueda}}
+</div>
+<div class="alert alert-secondary" *ngIf="!hayError && paises.length<=0">
+    Ingrese una busqueda
+</div>
+<div class="row" *ngIf="!hayError && paises.length > 0">
+    <div class="col" >
+        <app-pais-table [dataSource]="paises"></app-pais-table>
+    </div>
+</div>

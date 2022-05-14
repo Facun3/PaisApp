@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";     
+import { Observable } from "rxjs";    
 import { Country } from "../interfaces/country.interface";
 
 
@@ -14,7 +14,19 @@ export class PaisService {
     constructor(private http: HttpClient){
     }
 
-    public searchByName( busqueda: string): Observable<Country[]> {
+    public searchByCountry( busqueda: string): Observable<Country[]> {
         return this.http.get<Country[]>(`${ this.countriesApi}/name/${ busqueda }`)
+    }
+
+    public searchByRegion( busqueda: string): Observable<Country[]> {
+        return this.http.get<Country[]>(`${ this.countriesApi}/region/${ busqueda }`)
+    }
+
+    public searchByCapital( busqueda: string): Observable<Country[]> {
+        return this.http.get<Country[]>(`${ this.countriesApi}/capital/${ busqueda }`)
+    }
+
+    public searchByAlpha( busqueda: string): Observable<Country[]> {
+        return this.http.get<Country[]>(`${ this.countriesApi}/alpha/${ busqueda }`)
     }
 }
